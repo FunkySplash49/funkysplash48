@@ -1,8 +1,8 @@
-Ok
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Letter to My Love</title>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital@0;1&display=swap" rel="stylesheet">
   <style>
@@ -11,16 +11,16 @@ Ok
       margin: 0;
       background: url('https://www.transparenttextures.com/patterns/old-map.png'), #f6e3c5;
       font-family: 'Lora', serif;
-      padding: 20px;
+      padding: 10px;
       color: #3c2f28;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     .letter-container {
       max-width: 800px;
       margin: 0 auto;
-      height: 90vh;
+      min-height: 90vh;
       position: relative;
     }
 
@@ -29,18 +29,18 @@ Ok
       border-radius: 14px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.2);
       line-height: 1.8;
-      height: 100%;
       box-sizing: border-box;
       position: relative;
       overflow: hidden;
+      border: 2px solid #a47149;
     }
 
-    /* SCROLL ANIMATION (1 SECOND) */
+    /* SCROLL ANIMATION */
     .scroll-content {
       height: 0;
       overflow: hidden;
-      animation: unroll 1s ease-out forwards;
-      position: relative;
+      animation: unroll 1.5s ease-out forwards;
+      padding: 50px 30px 70px; /* Extra bottom padding for mobile */
     }
 
     @keyframes unroll {
@@ -50,38 +50,32 @@ Ok
 
     /* SCROLL EDGES */
     .scroll-top {
-      width: calc(100% - 4px);
-      height: 40px;
+      width: 100%;
+      height: 30px;
       background: url('https://www.transparenttextures.com/patterns/old-map.png'), #a47149;
-      border-radius: 14px 14px 0 0;
-      box-shadow: inset 0 10px 10px -10px rgba(0,0,0,0.3);
+      border-radius: 12px 12px 0 0;
+      box-shadow: inset 0 8px 8px -8px rgba(0,0,0,0.3);
       position: absolute;
       top: 0;
-      left: 2px;
+      left: 0;
       z-index: 2;
     }
 
     .scroll-bottom {
-      width: calc(100% - 4px);
-      height: 40px;
+      width: 100%;
+      height: 30px;
       background: url('https://www.transparenttextures.com/patterns/old-map.png'), #a47149;
-      border-radius: 0 0 14px 14px;
-      box-shadow: inset 0 -10px 10px -10px rgba(0,0,0,0.3);
+      border-radius: 0 0 12px 12px;
+      box-shadow: inset 0 -8px 8px -8px rgba(0,0,0,0.3);
       position: absolute;
       bottom: 0;
-      left: 2px;
+      left: 0;
       z-index: 2;
-    }
-
-    .letter-content {
-      padding: 60px 40px 80px; /* Extra bottom padding for scroll end */
-      position: relative;
-      min-height: calc(100% - 140px);
     }
 
     /* CONTENT STYLES */
     .letter-content h1 {
-      font-size: 32px;
+      font-size: clamp(26px, 5vw, 32px); /* Responsive font size */
       margin-bottom: 20px;
       color: #6a4e42;
       text-align: center;
@@ -91,9 +85,10 @@ Ok
 
     .letter-content p {
       margin-bottom: 20px;
-      text-indent: 30px;
+      text-indent: 1.5em;
       white-space: pre-line;
-      font-size: 17px;
+      font-size: clamp(16px, 4vw, 18px); /* Responsive font size */
+      line-height: 1.7;
     }
 
     em {
@@ -101,28 +96,34 @@ Ok
       color: #7d5a4f;
     }
 
-    /* MOBILE STYLES */
+    /* MOBILE OPTIMIZATION */
     @media screen and (max-width: 600px) {
-      .letter-content {
-        padding: 40px 20px 60px;
+      body {
+        padding: 8px;
       }
 
-      .letter-content h1 {
-        font-size: 26px;
+      .scroll-content {
+        padding: 40px 20px 60px; /* More bottom space for mobile */
       }
 
       .letter-content p {
-        font-size: 16px;
-        text-indent: 20px;
-      }
-
-      body {
-        padding: 10px;
+        margin-bottom: 18px;
+        text-indent: 1.2em;
       }
 
       .scroll-top, .scroll-bottom {
-        height: 30px;
-        width: calc(100% - 4px);
+        height: 25px;
+      }
+    }
+
+    /* VERY SMALL DEVICES */
+    @media screen and (max-width: 400px) {
+      .scroll-content {
+        padding: 30px 15px 50px;
+      }
+
+      .letter-content p {
+        font-size: 17px; /* Minimum readable size */
       }
     }
   </style>
@@ -162,8 +163,8 @@ Ok
           <em>~ Krisharyan</em>
           </p>
         </div>
-        <div class="scroll-bottom"></div>
       </div>
+      <div class="scroll-bottom"></div>
     </div>
   </div>
 
@@ -172,15 +173,16 @@ Ok
       const scrollContent = document.querySelector('.scroll-content');
       const letterWrapper = document.querySelector('.letter-wrapper');
 
-      // Calculate needed height
-      const contentHeight = scrollContent.scrollHeight;
+      // Calculate full content height including padding
+      const contentHeight = scrollContent.scrollHeight + 100; // Extra buffer
       scrollContent.style.setProperty('--scroll-height', `${contentHeight}px`);
 
-      // Enable scrolling after animation completes (1 second)
+      // Enable scrolling after animation
       setTimeout(() => {
         letterWrapper.style.overflowY = 'auto';
         scrollContent.style.overflow = 'visible';
-      }, 1000);
+        scrollContent.style.height = 'auto';
+      }, 1500);
     });
   </script>
 </body>
