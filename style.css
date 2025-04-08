@@ -1,0 +1,108 @@
+/* style.css - Complete Version with Scroll Animation */
+body {
+  margin: 0;
+  background: url('https://www.transparenttextures.com/patterns/old-map.png'), #f6e3c5;
+  font-family: 'Lora', serif;
+  padding: 20px;
+  color: #3c2f28;
+}
+
+.letter-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: rgba(255, 248, 230, 0.94);
+  border: 2px solid #a47149;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  padding: 0;
+  line-height: 1.8;
+  overflow: hidden;
+  max-height: 90vh;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.scroll-roll {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  animation: unroll 2.5s ease-out forwards;
+  animation-delay: 0.5s;
+  padding: 40px;
+}
+
+.scroll-top, .scroll-bottom {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  background: url('https://www.transparenttextures.com/patterns/old-map.png'), #a47149;
+  z-index: 2;
+  left: 0;
+}
+
+.scroll-top {
+  top: 0;
+  border-radius: 14px 14px 0 0;
+  box-shadow: inset 0 10px 10px -10px rgba(0,0,0,0.3);
+}
+
+.scroll-bottom {
+  bottom: 0;
+  border-radius: 0 0 14px 14px;
+  box-shadow: inset 0 -10px 10px -10px rgba(0,0,0,0.3);
+}
+
+@keyframes unroll {
+  0% { height: 0; opacity: 0; }
+  100% { height: var(--scroll-height); opacity: 1; }
+}
+
+.letter-content h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #6a4e42;
+  text-align: center;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.letter-content p {
+  margin-bottom: 20px;
+  text-indent: 30px;
+  white-space: pre-line;
+  font-size: 17px;
+}
+
+em {
+  font-style: italic;
+  color: #7d5a4f;
+}
+
+/* Mobile optimization */
+@media screen and (max-width: 600px) {
+  .letter-wrapper {
+    padding: 0;
+    max-height: none;
+  }
+
+  .scroll-roll {
+    padding: 20px;
+  }
+
+  .scroll-top, .scroll-bottom {
+    height: 30px;
+  }
+
+  .letter-content h1 {
+    font-size: 26px;
+  }
+
+  .letter-content p {
+    font-size: 16px;
+    text-indent: 20px;
+  }
+
+  body {
+    padding: 10px;
+  }
+}
